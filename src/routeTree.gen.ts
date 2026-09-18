@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as PgsIndexRouteImport } from './routes/pgs/index'
+import { Route as PgsSlugRouteImport } from './routes/pgs/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PgsIndexRoute = PgsIndexRouteImport.update({
+  id: '/pgs/',
+  path: '/pgs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PgsSlugRoute = PgsSlugRouteImport.update({
+  id: '/pgs/$slug',
+  path: '/pgs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/compare': typeof CompareRoute
+  '/pgs/$slug': typeof PgsSlugRoute
+  '/pgs/': typeof PgsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/compare': typeof CompareRoute
+  '/pgs/$slug': typeof PgsSlugRoute
+  '/pgs': typeof PgsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/compare': typeof CompareRoute
+  '/pgs/$slug': typeof PgsSlugRoute
+  '/pgs/': typeof PgsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/auth' | '/compare' | '/pgs/$slug' | '/pgs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/auth' | '/compare' | '/pgs/$slug' | '/pgs'
+  id: '__root__' | '/' | '/auth' | '/compare' | '/pgs/$slug' | '/pgs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  CompareRoute: typeof CompareRoute
+  PgsSlugRoute: typeof PgsSlugRoute
+  PgsIndexRoute: typeof PgsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pgs/': {
+      id: '/pgs/'
+      path: '/pgs'
+      fullPath: '/pgs/'
+      preLoaderRoute: typeof PgsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pgs/$slug': {
+      id: '/pgs/$slug'
+      path: '/pgs/$slug'
+      fullPath: '/pgs/$slug'
+      preLoaderRoute: typeof PgsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  CompareRoute: CompareRoute,
+  PgsSlugRoute: PgsSlugRoute,
+  PgsIndexRoute: PgsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
