@@ -37,20 +37,20 @@ type SearchParams = {
 
 export const Route = createFileRoute("/pgs/")({
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
-    q: typeof search.q === "string" && search.q ? search.q : undefined,
-    gender: ["boys", "girls", "coed"].includes(String(search.gender))
-      ? String(search.gender)
+    q: typeof search["q"] === "string" && search["q"] ? search["q"] : undefined,
+    gender: ["boys", "girls", "coed"].includes(String(search["gender"]))
+      ? String(search["gender"])
       : undefined,
-    max: Number(search.max) > 0 ? Number(search.max) : undefined,
-    sharing: SHARING_TYPES.includes(String(search.sharing) as (typeof SHARING_TYPES)[number])
-      ? String(search.sharing)
+    max: Number(search["max"]) > 0 ? Number(search["max"]) : undefined,
+    sharing: SHARING_TYPES.includes(String(search["sharing"]) as (typeof SHARING_TYPES)[number])
+      ? String(search["sharing"])
       : undefined,
-    dist: ["500", "1000", "2000", "3000"].includes(String(search.dist))
-      ? String(search.dist)
+    dist: ["500", "1000", "2000", "3000"].includes(String(search["dist"]))
+      ? String(search["dist"])
       : undefined,
-    amenities: typeof search.amenities === "string" && search.amenities ? search.amenities : undefined,
-    sort: ["price-asc", "price-desc", "distance", "rating"].includes(String(search.sort))
-      ? String(search.sort)
+    amenities: typeof search["amenities"] === "string" && search["amenities"] ? search["amenities"] : undefined,
+    sort: ["price-asc", "price-desc", "distance", "rating"].includes(String(search["sort"]))
+      ? String(search["sort"])
       : undefined,
     view: search["view"] === "list" ? "list" : undefined,
   }),
