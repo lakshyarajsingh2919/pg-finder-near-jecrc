@@ -11,12 +11,12 @@ import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
-type AuthSearch = { mode?: string; role?: string };
+type AuthSearch = { mode?: string | undefined; role?: string | undefined };
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (search: Record<string, unknown>): AuthSearch => ({
-    mode: search.mode === "signup" ? "signup" : undefined,
-    role: search.role === "owner" ? "owner" : undefined,
+    mode: search["mode"] === "signup" ? "signup" : undefined,
+    role: search["role"] === "owner" ? "owner" : undefined,
   }),
   head: () => ({
     meta: [
