@@ -15,8 +15,8 @@ type AuthSearch = { mode?: string; role?: string };
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (search: Record<string, unknown>): AuthSearch => ({
-    mode: search.mode === "signup" ? "signup" : undefined,
-    role: search.role === "owner" ? "owner" : undefined,
+    mode: search["mode"] === "signup" ? "signup" : undefined,
+    role: search["role"] === "owner" ? "owner" : undefined,
   }),
   head: () => ({
     meta: [
