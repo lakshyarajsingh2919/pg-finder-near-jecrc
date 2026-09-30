@@ -25,14 +25,14 @@ import { AMENITIES, rupees, SHARING_TYPES, type Pg } from "@/lib/pg";
 import { cn } from "@/lib/utils";
 
 type SearchParams = {
-  q?: string;
-  gender?: string;
-  max?: number;
-  sharing?: string;
-  dist?: string;
-  amenities?: string;
-  sort?: string;
-  view?: string;
+  q?: string | undefined;
+  gender?: string | undefined;
+  max?: number | undefined;
+  sharing?: string | undefined;
+  dist?: string | undefined;
+  amenities?: string | undefined;
+  sort?: string | undefined;
+  view?: string | undefined;
 };
 
 export const Route = createFileRoute("/pgs/")({
