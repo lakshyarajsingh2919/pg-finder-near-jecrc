@@ -52,7 +52,7 @@ export const Route = createFileRoute("/pgs/")({
     sort: ["price-asc", "price-desc", "distance", "rating"].includes(String(search.sort))
       ? String(search.sort)
       : undefined,
-    view: search.view === "list" ? "list" : undefined,
+    view: search["view"] === "list" ? "list" : undefined,
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(activePgsQuery),
   head: () => ({
@@ -234,7 +234,7 @@ function Directory() {
           </SheetContent>
         </Sheet>
         <Select value={search.sort ?? "distance"} onValueChange={(v) => set({ sort: v })}>
-          <SelectTrigger size="sm" className="flex-1">
+          <SelectTrigger className="flex-1">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
